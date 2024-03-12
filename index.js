@@ -7,10 +7,11 @@ app.use(express.json());
 const PORT = process.env.PORT || 3001;
 
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
+  host: "sql6.freemysqlhosting.net",
+  user: "sql6690813",
+  password: "hxskFYvN1y",
   database: "elysium",
+  port: 3306,
 });
 connection.connect((err) => {
   if (err) {
