@@ -11,7 +11,6 @@ const connection = mysql.createConnection({
   user: "sql6690813",
   password: "hxskFYvN1y",
   database: "elysium",
-  port: 3306,
 });
 connection.connect((err) => {
   if (err) {
