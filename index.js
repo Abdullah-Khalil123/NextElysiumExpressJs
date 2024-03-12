@@ -35,7 +35,6 @@ app.get("/api/Expenses", (req, res) => {
       console.error("ERROR EXECUTING QUERY :", error);
       res.status(500).send("INTERNAL SERVER ERROR");
     } else {
-      console.log(results);
       res.status(200).send(results);
     }
   });
