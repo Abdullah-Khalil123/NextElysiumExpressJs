@@ -30,9 +30,10 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
   if (err) {
     console.log("Error Connecting to Database: ", err);
-  } else {
-    console.log("Connected To Database!!");
-  }
+  } 
+  // else {
+  //   console.log("Connected To Database!!");
+  // }
 });
 
 app.get("/api/", (req, res) => {
