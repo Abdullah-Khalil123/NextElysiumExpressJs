@@ -2,7 +2,21 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
 const app = express();
-app.use(cors());
+
+// Allow requests from a specific origin
+const allowedOrigins = ['https://abdullah-khalil123.github.io'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 const PORT = process.env.PORT || 3001;
 
@@ -12,6 +26,7 @@ const connection = mysql.createConnection({
   password: "Yvt7g8fuim",
   database: "sql11690822",
 });
+
 connection.connect((err) => {
   if (err) {
     console.log("Error Connecting to Database: ", err);
@@ -19,6 +34,7 @@ connection.connect((err) => {
     console.log("Connected To Database!!");
   }
 });
+
 app.get("/api/", (req, res) => {
   res.status(200).send("API CONNECTION TO ELYSIUM");
 });
