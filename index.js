@@ -4,20 +4,22 @@ const mysql = require("mysql");
 const app = express();
 
 // Allow requests from a specific origin
-const allowedOrigins = ['https://abdullah-khalil123.github.io'];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } 
-    else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-};
 
-app.use(cors(corsOptions));
+// const allowedOrigins = ['https://abdullah-khalil123.github.io'];
+
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } 
+//     else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   }
+// };
+
+app.use(cors());
 app.use(express.json());
 const PORT = process.env.PORT || 3001;
 
