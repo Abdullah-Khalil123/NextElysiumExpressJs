@@ -4,8 +4,6 @@ const mysql = require("mysql");
 const app = express();
 
 // Allow requests from a specific origin
-
-
 // const allowedOrigins = ['https://abdullah-khalil123.github.io'];
 
 // const corsOptions = {
