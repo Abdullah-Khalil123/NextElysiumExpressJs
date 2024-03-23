@@ -22,10 +22,11 @@ app.use(express.json());
 const PORT = process.env.PORT || 3001;
 
 const connection = mysql.createConnection({
-  host: "sql11.freemysqlhosting.net",
-  user: "sql11690822",
-  password: "Yvt7g8fuim",
-  database: "sql11690822",
+  host: "mysql-30f2be74-abdullah-afad.a.aivencloud.com",
+  user: "avnadmin",
+  password: "AVNS_Isq_aK03W5luoxShmoo",
+  database: "Elysium",
+  port: 24145
 });
 
 connection.connect((err) => {
