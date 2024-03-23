@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 3001;
 const connection = mysql.createConnection({
   host: "mysql-30f2be74-abdullah-afad.a.aivencloud.com",
   user: "avnadmin",
-  password: "AVNS_Isq_aK03W5luoxShmoo",
+  password: "",
   database: "Elysium",
   port: '24145'
 });
