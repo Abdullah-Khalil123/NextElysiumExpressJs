@@ -3,20 +3,17 @@ const cors = require("cors");
 const mysql = require("mysql2");
 const app = express();
 
-const databasePass = process.env.Aiven_Password;
-
 // Allow requests from a specific origin
-// const allowedOrigins = ['https://abdullah-khalil123.github.io'];
+// const allowedOrigins = ["http://localhost:3000"];
 
 // const corsOptions = {
 //   origin: function (origin, callback) {
 //     if (!origin || allowedOrigins.includes(origin)) {
 //       callback(null, true);
-//     } 
-//     else {
-//       callback(new Error('Not allowed by CORS'));
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
 //     }
-//   }
+//   },
 // };
 
 app.use(cors());
@@ -26,18 +23,17 @@ const PORT = process.env.PORT || 3001;
 const connection = mysql.createConnection({
   host: "mysql-30f2be74-abdullah-afad.a.aivencloud.com",
   user: "avnadmin",
-  password: databasePass,
+  password: "AVNS_Isq_aK03W5luoxShmoo",
   database: "Elysium",
-  port: '24145'
+  port: "24145",
 });
 
 connection.connect((err) => {
   if (err) {
     console.log("Error Connecting to Database: ", err);
-  } 
-  // else {
-  //   console.log("Connected To Database!!");
-  // }
+  } else {
+    console.log("Connected To Database!!");
+  }
 });
 
 app.get("/api/", (req, res) => {
