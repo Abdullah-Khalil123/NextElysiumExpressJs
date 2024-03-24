@@ -3,6 +3,7 @@ const cors = require("cors");
 const mysql = require("mysql2");
 const app = express();
 
+const databasePass = process.env.Aiven_Password;
 // Allow requests from a specific origin
 // const allowedOrigins = ["http://localhost:3000"];
 
@@ -23,7 +24,7 @@ const PORT = process.env.PORT || 3001;
 const connection = mysql.createConnection({
   host: "mysql-30f2be74-abdullah-afad.a.aivencloud.com",
   user: "avnadmin",
-  password: "AVNS_Isq_aK03W5luoxShmoo",
+  password: databasePass,
   database: "Elysium",
   port: "24145",
 });
