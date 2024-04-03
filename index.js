@@ -4,6 +4,7 @@ const mysql = require("mysql2");
 const app = express();
 
 const databasePass = process.env.Aiven_Password;
+const hostName = process.env.Aiven_host;
 // Allow requests from a specific origin
 // const allowedOrigins = ["http://localhost:3000"];
 
@@ -22,7 +23,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 3001;
 
 const connection = mysql.createConnection({
-  host: "mysql-30f2be74-abdullah-afad.a.aivencloud.com",
+  host: hostName,
   user: "avnadmin",
   password: databasePass,
   database: "Elysium",
