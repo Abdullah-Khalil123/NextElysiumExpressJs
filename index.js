@@ -40,7 +40,12 @@ connection.connect((err) => {
 app.get("/api/", (req, res) => {
   res.status(200).send("API CONNECTION TO ELYSIUM");
 });
-
+app.post("/api/addBooking", (req, res) => {
+  const data = req.body;
+  console.log(data);
+  // console.log(req.body);
+  res.status(200).send(data);
+});
 app.get("/api/Expenses", (req, res) => {
   const [roomID, month, year] = [
     req.query.room,
