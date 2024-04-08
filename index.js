@@ -3,8 +3,8 @@ const cors = require("cors");
 const mysql = require("mysql2");
 const app = express();
 
-const databasePass = process.env.Aiven_host;
-const hostName = process.env.Aiven_Password;
+const databasePass = process.env.Aiven_Password;
+const hostName = process.env.Aiven_host;
 // Allow requests from a specific origin
 // const allowedOrigins = ["http://localhost:3000"];
 
