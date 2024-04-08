@@ -54,9 +54,9 @@ app.post("/api/addBooking", (req, res) => {
   connection.query(query, (error, results) => {
     if (error) {
       console.error("ERROR EXECUTING QUERY :", error);
-      res.status(500).send("ERROR INSERT DATA\n" + query, error);
+      res.status(400).send("ERROR INSERT DATA\n" + query, error);
     } else {
-      res.status(200).send(query); // Change Later
+      res.status(200).send(results); // Change Later
     }
   });
 });
