@@ -3,8 +3,8 @@ const cors = require("cors");
 const mysql = require("mysql2");
 const app = express();
 
-const databasePass = process.env.Aiven_Password;
-const hostName = process.env.Aiven_host;
+const databasePass = process.env.Aiven_host;
+const hostName = process.env.Aiven_Password;
 // Allow requests from a specific origin
 // const allowedOrigins = ["http://localhost:3000"];
 
@@ -44,8 +44,21 @@ app.get("/api/", (req, res) => {
 app.post("/api/addBooking", (req, res) => {
   const data = req.body;
   console.log(data);
-  console.log(req.body);
-  res.status(200).send(data);
+
+  const query = `INSERT INTO rents (roomID, amount,currency, Date)
+  VALUES (${data["roomid"]}, ${data["amount"]},${data["currency"] ? 0 : 1}, '${
+    data["date"]
+  }'); `;
+
+  console.log(query);
+  connection.query(query, (error, results) => {
+    if (error) {
+      console.error("ERROR EXECUTING QUERY :", error);
+      res.status(500).send("ERROR INSERT DATA", error);
+    } else {
+      res.status(200).send(query); // Change Later
+    }
+  });
 });
 app.get("/api/Expenses", (req, res) => {
   const [roomID, month, year] = [
