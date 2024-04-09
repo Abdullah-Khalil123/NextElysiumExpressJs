@@ -94,7 +94,13 @@ app.get("/api/Rents", (req, res) => {
     }
   });
 });
-
+app.post("/api/addExpense", (req, res) => {
+  const data = req.body;
+  console.log(data);
+  const ExpenseidQuery = `Select ExpenseID from expenses where MONTH(Date) = ${123} and YEAR(Date) = ${123}`;
+  const query = `Insert into expenseitems (ExpensesID , ExpenseItem , ExpenseAmount)
+                 Values ( ${"123"} , ${data["discrip"]} , ${data["amount"]})`;
+});
 app.listen(PORT, () => {
   console.log("Server Running on Port : ", PORT);
 });
