@@ -97,9 +97,14 @@ app.get("/api/Rents", (req, res) => {
 app.post("/api/addExpense", (req, res) => {
   const data = req.body;
   console.log(data);
-  const ExpenseidQuery = `Select ExpenseID from expenses where MONTH(Date) = ${123} and YEAR(Date) = ${123}`;
+  const ExpenseidQuery = `Select ExpenseID from expenses where
+                          MONTH(Date) = ${
+                            data["Date"].split("-")[1]
+                          } and YEAR(Date) = ${data["Date"].split("-")[0]}`;
+  // date['Date'] is in YYYY-MM formate
   const query = `Insert into expenseitems (ExpensesID , ExpenseItem , ExpenseAmount)
                  Values ( ${"123"} , ${data["discrip"]} , ${data["amount"]})`;
+  console.log(ExpenseidQuery);
 });
 app.listen(PORT, () => {
   console.log("Server Running on Port : ", PORT);
