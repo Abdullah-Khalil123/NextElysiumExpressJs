@@ -99,8 +99,8 @@ app.post("/api/addExpense", (req, res) => {
   console.log(data);
   const ExpenseidQuery = `Select ExpenseID from expenses where
                           MONTH(Date) = ${
-                            data["Date"].split("-")[1]
-                          } and YEAR(Date) = ${data["Date"].split("-")[0]}`;
+                            data["date"].split("-")[1]
+                          } and YEAR(Date) = ${data["date"].split("-")[0]}`;
   // date['Date'] is in YYYY-MM formate
   const query = `Insert into expenseitems (ExpensesID , ExpenseItem , ExpenseAmount)
                  Values ( ${"123"} , ${data["discrip"]} , ${data["amount"]})`;
