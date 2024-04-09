@@ -5,6 +5,10 @@ const app = express();
 
 const databasePass = process.env.Aiven_Password;
 const hostName = process.env.Aiven_host;
+
+// const databasePass = "AVNS_Isq_aK03W5luoxShmoo";
+// const hostName = "mysql-30f2be74-abdullah-afad.a.aivencloud.com";
+
 // Allow requests from a specific origin
 // const allowedOrigins = ["http://localhost:3000"];
 
@@ -97,15 +101,36 @@ app.get("/api/Rents", (req, res) => {
 app.post("/api/addExpense", (req, res) => {
   const data = req.body;
   console.log(data);
-  const ExpenseidQuery = `Select ExpenseID from expenses where
-                          MONTH(Date) = ${
-                            data["date"].split("-")[1]
-                          } and YEAR(Date) = ${data["date"].split("-")[0]}`;
-  // date['Date'] is in YYYY-MM formate
-  const query = `Insert into expenseitems (ExpensesID , ExpenseItem , ExpenseAmount)
-                 Values ( ${"123"} , ${data["discrip"]} , ${data["amount"]})`;
-  console.log(ExpenseidQuery);
+
+  // Query to get ExpensesID based on the provided date
+  const expenseIdQuery = `SELECT ExpensesID FROM expenses WHERE MONTH(Date) = ${
+    data["date"].split("-")[1]
+  } AND YEAR(Date) = ${data["date"].split("-")[0]}`;
+
+  connection.query(expenseIdQuery, (error, results) => {
+    if (error) {
+      res.status(400).send("INTERNAL SERVER ERROR");
+      return;
+    }
+
+    if (results.length > 0) {
+      const ExpensesID = results[0]["ExpensesID"];
+
+      const query = `INSERT INTO expenseitems (ExpensesID, ExpenseItem, ExpenseAmount) VALUES (${ExpensesID}, '${data["discrip"]}', ${data["amount"]})`;
+
+      connection.query(query, (error, results) => {
+        if (error) {
+          res.status(400).send("INTERNAL SERVER ERROR");
+        } else {
+          res.status(200).send("OK");
+        }
+      });
+    } else {
+      res.status(404).send("Expense for the provided date not found");
+    }
+  });
 });
+
 app.listen(PORT, () => {
   console.log("Server Running on Port : ", PORT);
 });
