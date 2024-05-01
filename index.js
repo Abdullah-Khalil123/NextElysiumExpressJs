@@ -101,6 +101,19 @@ app.get("/api/Rents", (req, res) => {
   });
 });
 
+app.get("/api/getOccupentRate", (req, res) => {
+  const year = new Date().getFullYear();
+  const Query = `SELECT * FROM Occupancy where Year(DATE) = ${year};`;
+
+  connection.query(Query, (error, results) => {
+    if (error) {
+      res.status(400).send("ERROR RETREVING OCC RATE");
+    } else {
+      res.status(200).send(results);
+    }
+  });
+});
+
 app.post("/api/addExpense", (req, res) => {
   const data = req.body;
   console.log(data);
