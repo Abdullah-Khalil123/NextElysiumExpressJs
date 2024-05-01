@@ -3,11 +3,11 @@ const cors = require("cors");
 const mysql = require("mysql2");
 const app = express();
 
-const databasePass = process.env.Aiven_Password;
-const hostName = process.env.Aiven_host;
+// const databasePass = process.env.Aiven_Password;
+// const hostName = process.env.Aiven_host;
 
-// const databasePass = "AVNS_Isq_aK03W5luoxShmoo";
-// const hostName = "mysql-30f2be74-abdullah-afad.a.aivencloud.com";
+const databasePass = "AVNS_Isq_aK03W5luoxShmoo";
+const hostName = "mysql-30f2be74-abdullah-afad.a.aivencloud.com";
 
 // Allow requests from a specific origin
 // const allowedOrigins = ["http://localhost:3000"];
@@ -45,16 +45,17 @@ connection.connect((err) => {
 app.get("/api/", (req, res) => {
   res.status(200).send("API CONNECTION TO ELYSIUM");
 });
+
 app.post("/api/addBooking", (req, res) => {
   const data = req.body;
-  console.log(data);
+  // console.log(data);
 
   const query = `INSERT INTO rents (roomID, amount,currency, Date)
   VALUES (${data["roomid"]}, ${data["amount"]},${data["currency"] ? 0 : 1}, '${
     data["date"]
   }'); `;
 
-  console.log(query);
+  // console.log(query);
   connection.query(query, (error, results) => {
     if (error) {
       console.error("ERROR EXECUTING QUERY :", error);
@@ -64,6 +65,7 @@ app.post("/api/addBooking", (req, res) => {
     }
   });
 });
+
 app.get("/api/Expenses", (req, res) => {
   const [roomID, month, year] = [
     req.query.room,
@@ -98,6 +100,7 @@ app.get("/api/Rents", (req, res) => {
     }
   });
 });
+
 app.post("/api/addExpense", (req, res) => {
   const data = req.body;
   console.log(data);
@@ -129,6 +132,18 @@ app.post("/api/addExpense", (req, res) => {
       res.status(404).send("Expense for the provided date not found");
     }
   });
+});
+
+app.post("/api/deleteRent", (req, res) => {
+  const data = req.body;
+  // console.log(data);
+  const query = `Delete from rents where rentID = ${data["rentID"]}`;
+  connection.query(query, (error, results) => {
+    if (error) {
+      res.status(500).send("Cannot Delete Entry");
+    }
+  });
+  res.status(200).send("Deleted Successfully");
 });
 
 app.listen(PORT, () => {
