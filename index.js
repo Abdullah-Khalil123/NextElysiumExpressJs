@@ -116,7 +116,7 @@ app.get("/api/getOccupentRate", (req, res) => {
 
 app.get("/api/getMonthlyFlow", (req, res) => {
   const [year, month] = [new Date().getMonth(), new Date().getFullYear()];
-  const Query = `select roomID, amount from rents where year(date) = ${year} and month(date) = ${month};`;
+  const Query = `select roomID, amount from rents where year(Date) = ${year} and month(Date) = ${month};`;
   connection.query(Query, (error, results) => {
     if (error) {
       res.status(400).send("Error at (getMonthlyFlow)API" + error);
