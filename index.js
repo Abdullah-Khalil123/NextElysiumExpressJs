@@ -76,7 +76,7 @@ app.get("/api/Expenses", (req, res) => {
   connection.query(query, (error, results) => {
     if (error) {
       console.error("ERROR EXECUTING QUERY :", error);
-      res.status(500).send("INTERNAL SERVER ERROR");
+      res.status(400).send("INTERNAL SERVER ERROR");
     } else {
       res.status(200).send(results);
     }
