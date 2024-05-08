@@ -129,36 +129,7 @@ app.get("/api/getMonthlyFlow", (req, res) => {
   });
 });
 app.post("/api/addExpense", (req, res) => {
-  const data = req.body;
-  console.log(data);
-
-  // Query to get ExpensesID based on the provided date
-  const expenseIdQuery = `SELECT ExpensesID FROM expenses WHERE MONTH(Date) = ${
-    data["date"].split("-")[1]
-  } AND YEAR(Date) = ${data["date"].split("-")[0]}`;
-
-  connection.query(expenseIdQuery, (error, results) => {
-    if (error) {
-      res.status(400).send("INTERNAL SERVER ERROR");
-      return;
-    }
-
-    if (results.length > 0) {
-      const ExpensesID = results[0]["ExpensesID"];
-
-      const query = `INSERT INTO expenseitems (ExpensesID, ExpenseItem, ExpenseAmount) VALUES (${ExpensesID}, '${data["discrip"]}', ${data["amount"]})`;
-
-      connection.query(query, (error, results) => {
-        if (error) {
-          res.status(400).send("INTERNAL SERVER ERROR");
-        } else {
-          res.status(200).send("OK");
-        }
-      });
-    } else {
-      res.status(404).send("Expense for the provided date not found");
-    }
-  });
+  res.status(400).send("TODO WORK IN PROGRESS");
 });
 
 app.post("/api/deleteRent", (req, res) => {
